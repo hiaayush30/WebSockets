@@ -15,6 +15,9 @@ const App = () => {
         setChat(chat => [...chat, e.data]);
       }
     }
+    ws.onclose=()=>{
+           alert('chat closed!')
+    }
   }, [])
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
