@@ -15,7 +15,7 @@ function App() {
     }
     return ()=>{
       //close the socket
-      socket?.close();
+      socket?.close(); 
     }
   },[])
   const handleSend=()=>{
