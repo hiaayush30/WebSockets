@@ -8,7 +8,7 @@ const App = () => {
   const [joinRoomCode, setJoinRoomCode] = useState('');
 
   const handleNewRoom = () => {
-    const ws = new WebSocket('ws://localhost:8000');
+    const ws = new WebSocket(import.meta.env.VITE_BE_DOMAIN+':8000');
     ws.onopen = () => {
       setSocket(ws);
       ws.send(JSON.stringify({
@@ -37,7 +37,7 @@ const App = () => {
     if (joinRoomCode.trim().length != 4) {
       return alert('Enter a valid code!');
     }
-    const ws = new WebSocket('ws://localhost:8000');
+    const ws = new WebSocket(import.meta.env.VITE_BE_DOMAIN+':8000');
     ws.onopen = () => {
       setSocket(ws);
       ws.send(JSON.stringify({
