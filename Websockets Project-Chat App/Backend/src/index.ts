@@ -9,7 +9,6 @@ interface roomObject {
 }
 const getRoomCode = () => crypto.randomBytes(2).toString('hex');
 let rooms: Array<roomObject> = [];
-
 wss.on('connection', (ws) => {
     userCount++;
     console.log(userCount);
