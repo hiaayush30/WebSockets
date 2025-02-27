@@ -7,7 +7,10 @@ const App = () => {
     const socket = io("http://localhost:3000"); //base url required here 
     //if not passed anything takes the FE url as default
     socket.on("connect", () => {
-      setText("connected");
+      setText("connected:" +socket.id);
+    });
+    socket.on("welcome",(message)=>{
+      alert(message);
     })
   }, [])
   return (

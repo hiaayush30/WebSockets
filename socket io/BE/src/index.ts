@@ -15,6 +15,9 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 const server = createServer(app);
+// server = createServer(app) → Wraps app in an HTTP server 
+// (so it can handle both HTTP and WebSockets).
+// Socket.IO requires an HTTP server instance, not an Express app.
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
@@ -26,7 +29,12 @@ const io = new Server(server, {
 io.on("connection", (socket: Socket) => {
     console.log("user connected");
     console.log("id" + socket.id);
+    socket.emit("welcome","youkoso")
+    socket.on('disconnect',()=>{
+        console.log(socket.id + " disconnected")
+    })
 })
+
 
 server.listen(3000, () => {
     console.log('listening on *:3000');
