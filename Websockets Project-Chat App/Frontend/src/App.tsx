@@ -34,6 +34,7 @@ const App = () => {
       alert('session closed!');
       setChat(chat => [...chat, "session terminated"]);
       setSocket(null);
+      setRoomCode('');
     }
   }
   const handleJoinRoom = () => {
@@ -67,6 +68,7 @@ const App = () => {
         alert('session closed!');
         setChat(chat => [...chat, "session terminated"]);
         setSocket(null);
+        setRoomCode('');
       }
     }
   }
@@ -121,12 +123,14 @@ const App = () => {
               className='bg-red-600 max-sm:absolute max-sm:top-2 max-sm:left-2 text-slate-200 rounded-md p-1 cursor-pointer'>TERMINATE</button></>}
         </form>
         {!socket && <div className='flex gap-5 items-center justify-center w-full'>
-          <button disabled={loading} className={`${loading ? 'bg-blue-300':'bg-blue-600'} p-1 cursor-pointer rounded-md`} onClick={handleNewRoom}>new chat</button>
+          <button disabled={loading} className={`${loading ? 'bg-red-300':'bg-red-600'} p-1 cursor-pointer rounded-md`} onClick={handleNewRoom}>new chat</button>
           <div className='border-2 rounded-md'>
             <input value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)}
               type='text' placeholder='room code' className='p-1 outline-none' />
-            <button disabled={loading} onClick={handleJoinRoom} className={`${loading ? 'bg-blue-300':'bg-blue-600'} p-1 cursor-pointer rounded-md`}>JOIN</button>
+            <button disabled={loading} onClick={handleJoinRoom} className={`${loading ? 'bg-red-300':'bg-red-600'} p-1 cursor-pointer rounded-md`}>JOIN</button>
           </div>
+          <div onClick={()=>setChat([])} 
+          className='bg-slate-700 rounded-md p-1 cursor-pointer'>Clear Chat</div>
         </div>}
       </div>
     </div>
