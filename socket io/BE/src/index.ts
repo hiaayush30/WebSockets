@@ -26,12 +26,21 @@ const io = new Server(server, {
     }
 });
 
+const sockets = new Set<string>();
+
 io.on("connection", (socket: Socket) => {
+    sockets.add(socket.id);
     console.log("user connected");
-    console.log("id" + socket.id);
-    socket.emit("welcome","youkoso")
+    socket.emit("welcome","youkoso "+socket.id)
+    socket.broadcast.emit("welcome",socket.id+" joined!")
+    
+    socket.on("data",(data)=>{
+        console.log("data recieved:"+data);
+    })
+
     socket.on('disconnect',()=>{
         console.log(socket.id + " disconnected")
+        sockets.delete(socket.id);
     })
 })
 
